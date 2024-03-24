@@ -61,7 +61,6 @@ def texto_reemplazar(contenido_libro: str) -> str:
         contenido_sin_distincion = contenido_libro.lower()
         palabra_reemplazada = palabra_reemplazada.lower()
     
-    
     indice_busqueda = 0
     while(contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) != -1):
         inicio_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda)
@@ -76,5 +75,8 @@ def texto_reemplazar(contenido_libro: str) -> str:
             contenido_libro = contenido_libro[0:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:len(contenido_libro)]
             contenido_sin_distincion = contenido_libro.lower()
     return contenido_libro
+
+
+
 
 print(texto_reemplazar(ContenidoArchivo1))
