@@ -1,5 +1,7 @@
 import os
 
+abecedario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
 contenido = os.listdir('Libros')
 for i, libro in enumerate(contenido):
     print(f"Libro {i} : {libro}")
@@ -46,12 +48,40 @@ print(len(ContenidoArchivo1.split("\n")))
 #         print("Por favor selecciona una opcion correcta")
 
 def texto_reemplazar(contenido_libro: str) -> str:
-# Funcion para reemplazar palabras
+# Funcion para reemplazar palabras, retorna el contenido_libro reemplazado
+
     palabra_reemplazada = input("Escribir palabra reemplazada: ")
     palabra_nueva = input("Escribir palabra nueva: ")
     
+    distincion = input("¿Distincion de mayusculas y minusculas? (si/no): ")
+    completa = input("¿Reemplazar palabra completa? (si/no): ")
     
-    print(contenido_libro.replace(palabra_reemplazada, palabra_nueva))
+    contenido_sin_distincion = contenido_libro
+    if distincion.lower() == "no":
+        contenido_sin_distincion = contenido_libro.lower()
+        palabra_reemplazada = palabra_reemplazada.lower()
+    
+    if completa.lower() == "si":
+        indice_busqueda = 0
+        while(contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) != -1):
+            inicio_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda)
+            fin_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) + len(palabra_reemplazada) - 1            
+            if contenido_libro[inicio_palabra - 1].lower() not in abecedario and contenido_libro[fin_palabra + 1].lower() not in abecedario:
+                contenido_libro = contenido_libro[0:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:len(contenido_libro)]
+                contenido_sin_distincion = contenido_libro.lower()
+            else:
+                indice_busqueda = fin_palabra
+        return contenido_libro
+    else:
+        if distincion.lower() == "si":
+            return contenido_libro.replace(palabra_reemplazada, palabra_nueva)
+        else:
+            while(contenido_sin_distincion.find(palabra_reemplazada) != -1):
+                inicio_palabra = contenido_sin_distincion.find(palabra_reemplazada)
+                fin_palabra = contenido_sin_distincion.find(palabra_reemplazada) + len(palabra_reemplazada) - 1            
+                contenido_libro = contenido_libro[0:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:len(contenido_libro)]
+                contenido_sin_distincion = contenido_libro.lower()
+            return contenido_libro
     
 
-texto_reemplazar(ContenidoArchivo1)
+print(texto_reemplazar(ContenidoArchivo1))
