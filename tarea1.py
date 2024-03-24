@@ -1,4 +1,5 @@
 import os
+
 contenido = os.listdir('Libros')
 for i, libro in enumerate(contenido):
     print(f"Libro {i} : {libro}")
@@ -43,3 +44,14 @@ print(len(ContenidoArchivo1.split("\n")))
 
 #     else:
 #         print("Por favor selecciona una opcion correcta")
+
+def texto_reemplazar(contenido_libro: str) -> str:
+# Funcion para reemplazar palabras
+    palabra_reemplazada = input("Escribir palabra reemplazada: ")
+    palabra_nueva = input("Escribir palabra nueva: ")
+    
+    
+    print(contenido_libro.replace(palabra_reemplazada, palabra_nueva))
+    
+
+texto_reemplazar(ContenidoArchivo1)
