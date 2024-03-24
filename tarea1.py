@@ -8,13 +8,6 @@ nombre_libro = contenido[int(opcion)]
 
 with open(f"Libros/{nombre_libro}", "r", encoding="UTF-8") as Archivo1:
     ContenidoArchivo1 = Archivo1.read()
-#   print(ContenidoArchivo1)
-# print((ContenidoArchivo1.split()))
-print(len(ContenidoArchivo1.split()))
-print(len(set(ContenidoArchivo1)))
-print(len(ContenidoArchivo1))
-print(len(ContenidoArchivo1.replace(" ","")))
-print(len(ContenidoArchivo1.split("\n")))
 
 # opcion = ""
 
