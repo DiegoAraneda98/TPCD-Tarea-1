@@ -58,22 +58,24 @@ def texto_reemplazar(contenido_libro: str) -> str:
     
     contenido_sin_distincion = contenido_libro
     if distincion.lower() == "no":
-        contenido_sin_distincion = contenido_libro.lower()
+        contenido_sin_distincion = contenido_sin_distincion.lower()
         palabra_reemplazada = palabra_reemplazada.lower()
     
     indice_busqueda = 0
     while(contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) != -1):
         inicio_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda)
-        fin_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) + len(palabra_reemplazada) - 1            
+        fin_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) + len(palabra_reemplazada) - 1       
+             
         if completa.lower() == "si":
             if contenido_libro[inicio_palabra - 1].lower() not in abecedario and contenido_libro[fin_palabra + 1].lower() not in abecedario:
-                contenido_libro = contenido_libro[0:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:len(contenido_libro)]
-                contenido_sin_distincion = contenido_libro.lower()
+                contenido_libro = contenido_libro[:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:]
             else:
                 indice_busqueda = fin_palabra
         else:
-            contenido_libro = contenido_libro[0:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:len(contenido_libro)]
-            contenido_sin_distincion = contenido_libro.lower()
+            contenido_libro = contenido_libro[:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:]
+        
+        contenido_sin_distincion = contenido_libro.lower()
+    
     return contenido_libro
 
 
