@@ -19,6 +19,27 @@ print(len(ContenidoArchivo1))
 print(len(ContenidoArchivo1.replace(" ","")))
 print(len(ContenidoArchivo1.split("\n")))
 
+
+contenido_libro = ContenidoArchivo1
+numero_palabras_total = len(contenido_libro.split())
+print(f"El número total de palabras del libro {nombre_libro} es de {numero_palabras_total}\n")
+
+numero_palabras_no_repetidas = len(set(contenido_libro.split()))
+print(f"El número de palabras no repetidas del libro {nombre_libro} es de {numero_palabras_no_repetidas}\n")
+
+numero_caracteres_con_espacio = len(contenido_libro)
+numero_caracteres_con_espacio =  len(contenido_libro.replace("\n",""))
+print(f"El número de caracteres con espacio del libro {nombre_libro} es de {numero_caracteres_con_espacio}\n")
+
+numero_caracteres_sin_espacio = len((contenido_libro.replace(" ","")).replace("\n",""))
+print(f"El número de caracteres sin espacio del libro {nombre_libro} es de {numero_caracteres_sin_espacio}\n")
+
+numero_parrafos = contenido_libro.count("\n")
+print(f"El número de párrafos del libro {nombre_libro} es de {numero_parrafos}")
+
+numero_parrafos_2 = len(contenido_libro.splitlines()) - contenido_libro.splitlines().count("")
+print(f"El número de párrafos del libro {nombre_libro} es de {numero_parrafos_2}")
+
 # opcion = ""
 
 # while(opcion != "salir"):
@@ -77,8 +98,6 @@ def texto_reemplazar(contenido_libro: str) -> str:
         contenido_sin_distincion = contenido_libro.lower()
     
     return contenido_libro
-
-
 
 
 print(texto_reemplazar(ContenidoArchivo1))
