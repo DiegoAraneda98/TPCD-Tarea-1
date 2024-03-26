@@ -27,6 +27,8 @@ print(f"El número total de palabras del libro {nombre_libro} es de {numero_pala
 numero_palabras_no_repetidas = len(set(contenido_libro.split()))
 print(f"El número de palabras no repetidas del libro {nombre_libro} es de {numero_palabras_no_repetidas}\n")
 
+
+# EN LUGAR DE USAR REPLACE SE PUEDE RESTAR LA CANTIDAD DE SALTOS DE LINEA
 numero_caracteres_con_espacio = len(contenido_libro)
 numero_caracteres_con_espacio =  len(contenido_libro.replace("\n",""))
 print(f"El número de caracteres con espacio del libro {nombre_libro} es de {numero_caracteres_con_espacio}\n")
