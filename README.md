@@ -22,7 +22,7 @@
 
 * Para ejecutar el programa, primero es necesario tenir listo el entorno en el cual se ejecutará en nuestro caso con ***Visual Studio Code***
 * Para el correcto funcionamiento del programa es necesario seguir el paso a paso del archivo ***tarea_1.ipynb***
-![link de prueba](https://www.tmssoftware.com/site/img/web/webcore/webcore-vsc-3-ide.png)
+![link de prueba](img\tpcd.png)
 
 
 
