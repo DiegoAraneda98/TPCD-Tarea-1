@@ -1,6 +1,6 @@
 import os
 
-abecedario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+abecedario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','á','é','í','ó','ú']
 
 contenido = os.listdir('Libros')
 for i, libro in enumerate(contenido):
@@ -70,30 +70,45 @@ print(f"El número de párrafos del libro {nombre_libro} es de {numero_parrafos_
 #     else:
 #         print("Por favor selecciona una opcion correcta")
 
-def texto_reemplazar(contenido_libro: str) -> str:
-# Funcion para reemplazar palabras, retorna el contenido_libro reemplazado
 
+
+# 1. La funcion texto_reemplazar tiene como entrada un string con el contenido del texto que se desea analizar.
+# 2. Luego se solicita al usuario escribir la palabra que quiere reemplazar y luego la palabra nueva. Luego se le pide si quiere hacer distincion de mayusculas y minusculas y si es palabra completa o substring
+# 3. Luego se hace una transformacion del texto en caso de no distinguir mayusculas para una mejor busqueda.
+# 4. Ahora para la busqueda se hace uso del comando find junto con la variable indice_busqueda para ir iterando sobre todas la palabras.
+# 5. Luego busca la primera palabra que encuentre a partir del indice y almacena los indices del inicio y final de la palabra en el string.
+# 6. Luego para hacer el reemplazo primero se verifica si tiene que ser palabra completa o substring
+# 7. Si es substring entonces simplemente crea un nuevo string usando el texto antes de la palabra, la palabra nueva, y el texto despues de la palabra
+# 8. Si tiene que ser completa entonces verifica que los caracteres antes y despues de la palabra no sean letras, si lo son actualiza el indice de busqueda
+# 9. En caso de no serlos, efectua el paso 7
+# 10. Luego actualiza el texto transformado sin distincion y al terminar el bucle while, retorna el nuevo contenido como string
+
+# Funcion para reemplazar palabras, retorna el contenido_libro reemplazado
+def texto_reemplazar(contenido_libro: str) -> str:
+    
+    # Solicitar palabras y opciones de reemplazo
     palabra_reemplazada = input("Escribir palabra reemplazada: ")
     palabra_nueva = input("Escribir palabra nueva: ")
-    
+
     distincion = input("¿Distincion de mayusculas y minusculas? (si/no): ")
     completa = input("¿Reemplazar palabra completa? (si/no): ")
-    
+
+    # Transformar texto para trabajar con minusculas
     contenido_sin_distincion = contenido_libro
     if distincion.lower() == "no":
         contenido_sin_distincion = contenido_sin_distincion.lower()
         palabra_reemplazada = palabra_reemplazada.lower()
-    
+
     indice_busqueda = 0
     while(contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) != -1):
         inicio_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda)
-        fin_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) + len(palabra_reemplazada) - 1       
-             
+        fin_palabra = contenido_sin_distincion.find(palabra_reemplazada, indice_busqueda) + len(palabra_reemplazada) - 1
+
         if completa.lower() == "si":
             if contenido_libro[inicio_palabra - 1].lower() not in abecedario and contenido_libro[fin_palabra + 1].lower() not in abecedario:
                 contenido_libro = contenido_libro[:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:]
             else:
-                indice_busqueda = fin_palabra
+                indice_busqueda = fin_palabra + 1
         else:
             contenido_libro = contenido_libro[:inicio_palabra] + palabra_nueva + contenido_libro[fin_palabra + 1:]
         
@@ -102,4 +117,7 @@ def texto_reemplazar(contenido_libro: str) -> str:
     return contenido_libro
 
 
-print(texto_reemplazar(ContenidoArchivo1))
+with open(f'salida/{nombre_libro}', 'w', encoding="UTF-8") as ArchivoNuevo:
+    ArchivoNuevo.write(texto_reemplazar(ContenidoArchivo1))
+
+print(ArchivoNuevo)
